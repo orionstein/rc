@@ -1,0 +1,65 @@
+"Customization and plugin mapping "
+let mapleader=","
+
+"Ctrlp "
+noremap <Leader>b <ESC>:CtrlPBuffer<CR>
+noremap <Leader><SPACE> <ESC>:CtrlPMRUFiles<CR>
+
+nmap <BACKSPACE> <Plug>(easymotion-overwin-f)
+" nmap <Leader>f <Plug>(easymotion-prefix)
+" nmap <Leader>j <Plug>(easymotion-j)
+" nmap <Leader>k <Plug>(easymotion-k)
+nmap <Leader>s <Plug>(easymotion-overwin-f2)
+" nmap <Leader>d <Plug>(easymotion-s2)
+nmap <Leader>n <Plug>(easymotion-next)
+nmap <Leader>N <Plug>(easymotion-previous)
+
+" Let <Tab> also do completion
+inoremap <silent><expr> <Tab>
+\ pumvisible() ? "\<C-n>" :
+\ deoplete#mappings#manual_complete()
+
+"Noob training "
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+
+nnoremap j gj
+nnoremap k gk
+
+" gundo "
+nnoremap <Leader>u :GundoToggle<CR>
+
+" Vim Fugitive "
+nnoremap <Leader>g :Gstatus<CR>
+
+" vimux "
+noremap <Leader>r :exec VimuxMakeRun()<CR>
+
+" Toggle folds with space "
+fu! ToggleFold()
+  if foldlevel('.') == 0
+    normal! l
+  else
+    if foldclosed('.') < 0
+      . foldclose
+    else
+      . foldopen
+    endif
+  endif
+  echo
+endf
+noremap <space> :call ToggleFold()<CR>
+
+" ESFormatting "
+" nnoremap <silent> <leader>es :Esformatter<CR>
+" vnoremap <silent> <leader>es :EsformatterVisual<CR>
+" 
+" Prettier "
+nnoremap <silent> <leader>f :Neoformat<CR>
+
+" Taglist "
+noremap <silent> <Leader>t :TlistToggle<CR>
+
+let g:elm_setup_keybindings = 0

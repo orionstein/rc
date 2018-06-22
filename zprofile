@@ -10,4 +10,5 @@ if [ -n "$SSH_TTY" -a -z "$STY" ]; then
   echo Tmux Sessions:
   tmux list-sessions
 fi
-# cleandocker &
+
+export PATH="$HOME/.cargo/bin:$PATH"

@@ -1,0 +1,95 @@
+syntax on
+set t_Co=256
+set nocompatible
+filetype off
+
+" Vundle "
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+
+" Navigation "
+Plugin 'kien/ctrlp.vim'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'benmills/vimux'
+Plugin 'tpope/vim-vinegar'
+Plugin 'Lokaltog/vim-easymotion'
+
+" Color "
+Plugin 'godlygeek/csapprox'
+Plugin 'ap/vim-css-color'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'mhartington/oceanic-next'
+
+" Search "
+Plugin 'rking/ag.vim'
+"Plugin 'wincent/command-t'
+Plugin 'burke/matcher'
+Plugin 'kana/vim-smartinput'
+"Plugin 'Townk/vim-autoclose'
+
+" Utilities "
+" Plugin 'mhinz/vim-startify' "
+Plugin 'w0rp/ale'
+Plugin 'elmcast/elm-vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'gregsexton/gitv'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-scripts/gitignore'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tmux-plugins/vim-tmux-focus-events'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'tpope/vim-obsession'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'flowtype/vim-flow'
+Plugin 'jceb/vim-orgmode'
+Plugin 'mmai/vim-markdown-wiki'
+Plugin 'tpope/vim-surround'
+
+" Editing "
+Plugin 'tpope/vim-repeat'
+" Plugin 'tpope/vim-sensible' "
+Plugin 'tpope/vim-unimpaired'
+" Plugin 'Valloric/YouCompleteMe' "
+"Plugin 'myint/syntastic-extras'
+" Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'tomtom/tcomment_vim'
+" Plugin 'terryma/vim-multiple-cursors' "
+Plugin 'dodie/vim-disapprove-deep-indentation'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'tpope/vim-markdown'
+Plugin 'suan/vim-instant-markdown'
+
+" Tag Support "
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'tmhedberg/matchit'
+Plugin 'sbdchd/neoformat'
+
+" Language support "
+Plugin 'othree/html5.vim'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'vim-scripts/VimClojure'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'moll/vim-node'
+Plugin 'pangloss/vim-javascript'
+Plugin 'othree/yajs.vim'
+Plugin 'mxw/vim-jsx'
+Plugin 'elixir-lang/vim-elixir'
+" Plugin 'othree/javascript-libraries-syntax.vim' "
+" Plugin 'burnettk/vim-angular' "
+Plugin 'elzr/vim-json'
+Plugin 'millermedeiros/vim-esformatter'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'sidorares/node-vim-debugger'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'rust-lang/rust.vim'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'tomlion/vim-solidity'
+Plugin 'carlitux/deoplete-ternjs'
+
+call vundle#end()
+

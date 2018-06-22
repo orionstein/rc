@@ -1,0 +1,149 @@
+set t_Co=256
+let g:rehash256 = 1 "
+
+set background=dark
+colorscheme bvemu
+
+" hide the gui menubar "
+if has('gui_running')
+  set guioptions=egmr
+  if has("mac")
+    set guifont=Menlo\ for\ Powerline:h11
+  else
+    set guifont=Menlo\ for\ Powerline\ 10
+  endif
+endif
+
+"Code handling "
+syntax on
+filetype plugin indent on
+set title                " change the terminal's title "
+
+autocmd BufNewFile,BufReadPost *.init set filetype=vim
+
+"viminfo"
+" set viminfo='50,%,<1000,s100,:20,n~/.vim/viminfo "
+set showcmd
+
+"Search help "
+set incsearch ignorecase hlsearch
+set autoread
+set smartcase
+set magic
+set showmatch
+set mat=2
+set ai
+set si
+set wrap
+set nu
+
+"Compatibility "
+set encoding=utf8
+set shiftwidth=2 softtabstop=2 tabstop=2
+"set smarttab " "use a mix of tabs and spaces"
+set expandtab "always use spaces"
+
+"Remove extra files "
+set nobackup
+set nowb
+set noswapfile
+
+"Contingencies "
+set history=10000         " remember more commands and search history "
+set undolevels=10000      " use many muchos levels of undo "
+set wildignore=*.swp,*.bak,*.pyc,*.class
+set hidden "Save buffers instead of closing "
+
+"Fix annoying "
+set visualbell           " don't beep "
+set noerrorbells         " don't beep "
+set pastetoggle=<F2>
+
+"Quicker command entry "
+nnoremap ; :
+
+set wildignore+=*/tmp/*,*.o,*.so,*.swp,*.zip,*.jar,*.class,*.pdf,*.gif,*.png,*.jpg,*.o,*.hi "
+
+if executable("ag")
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {
+        \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+        \ }
+endif
+
+if executable('matcher')
+    let g:ctrlp_match_func = { 'match': 'GoodMatch' }
+
+    function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
+
+      " Create a cache file if not yet exists
+      let cachefile = ctrlp#utils#cachedir().'/matcher.cache'
+      if !( filereadable(cachefile) && a:items == readfile(cachefile) )
+        call writefile(a:items, cachefile)
+      endif
+      if !filereadable(cachefile)
+        return []
+      endif
+
+      " a:mmode is currently ignored. In the future, we should probably do
+      " something about that. the matcher behaves like "full-line".
+      let cmd = 'matcher --limit '.a:limit.' --manifest '.cachefile.' '
+      if !( exists('g:ctrlp_dotfiles') && g:ctrlp_dotfiles )
+        let cmd = cmd.'--no-dotfiles '
+      endif
+      let cmd = cmd.a:str
+
+      return split(system(cmd), "\n")
+
+    endfunction
+end
+
+" Word wrap w/o line breaks "
+set wrap
+set linebreak
+set list
+set nostartofline
+
+" Nicer autocomplete commands "
+set wildmode=longest:full
+set wildmenu
+
+" Screw backups "
+set nobackup nowritebackup noswapfile
+
+set colorcolumn=+1
+set clipboard=unnamed
+
+set fileformats=unix,dos,mac
+scriptencoding utf-8
+set encoding=utf-8
+
+" Disable ex mode "
+nnoremap Q <nop>
+
+" folds! "
+set foldenable
+set foldmethod=syntax
+set foldnestmax=2
+set foldlevel=1
+set foldlevelstart=1
+set foldminlines=10
+set fillchars=vert:\|,fold:\
+noremap <Leader>f zR
+" Toggle folds with space "
+fu! ToggleFold()
+  if foldlevel('.') == 0
+    normal! l
+  else
+    if foldclosed('.') < 0
+      . foldclose
+    else
+      . foldopen
+    endif
+  endif
+  echo
+endf
+noremap <space> :call ToggleFold()<CR>

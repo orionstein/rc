@@ -1,0 +1,17 @@
+"Airline "
+set laststatus=2   " Always show the statusline "
+set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline) "
+let g:airline_powerline_fonts=1
+let g:airline_theme='serene'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_section_y='%{ObsessionStatus()}'
+
+"Tmuxline "
+let g:airline#extensions#tmuxline#enabled = 1
+let g:tmuxline_preset = {
+      \'a' : '#S',
+      \'win': ['#I', '#W'],
+      \'cwin': ['#I', '#W'],
+      \'x' : '#(cat ~/.thyme-tmux)',
+      \'y' : ['%d-%b-%y %H:%M', '#(~/.rc/tmux/cpu.sh)%', '#(~/.rc/tmux/mem.sh)'],
+      \'options': {'status-justify': 'left'}}
