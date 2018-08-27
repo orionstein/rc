@@ -194,7 +194,7 @@ alias up=run_docker
 alias build=build_docker
 alias vim='nvim'
 alias wifi='sudo ip link set down wlp1s0; sudo ifconfig wlp1s0 down; sudo wifi-menu'
-alias cleandockerimages="docker images | grep none | awk '{print $3}' | xargs docker rmi -f"
+alias cleandockerimages="docker images | grep none | awk '{print $3}' | xargs docker rmi -fv"
 alias cleandockercontainers="docker ps -a | grep 'Exit' | awk '{print $1}' | xargs docker rm -fv"
 alias cleandockercontainersall="docker rm -fv $(docker ps -a -q)"
 alias cleandockervolumes="docker volume ls -qf dangling=true | awk '{print $1}' | xargs docker volume rm"
@@ -241,3 +241,5 @@ export NVM_DIR="$HOME/.nvm"
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /Users/ofree/.nvm/versions/node/v9.7.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/ofree/.nvm/versions/node/v9.7.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

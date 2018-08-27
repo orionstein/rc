@@ -20,8 +20,17 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let g:EasyMotion_smartcase = 1
 
 let g:ale_linters = {
-\   'javascript': ['eslint'],
+\   'javascript': ['eslint', 'jshint'],
+\   'typescript': ['eslint', 'tslint', 'typecheck', 'tsserver'],
 \}
+
+let g:ale_fixers = {
+\   'javascript': ['prettier', 'eslint'],
+\   'javascript.jsx': ['prettier', 'eslint'],
+\   'typescript': ['prettier', 'tslint', 'eslint'],
+\}
+
+
 let g:airline#extensions#ale#enabled = 1
 " Write this in your vimrc file
 let g:ale_lint_on_text_changed = 'never'
@@ -36,18 +45,6 @@ function VimuxMakeRun()
   :VimuxRunCommand("clear;make")
 endfunction
 
-" Prettier "
-autocmd FileType javascript,javascript.jsx set formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ es5\ --semi\ false
-let g:neoformat_try_formatprg = 1
-
-" autocmd BufWritePre *.js Neoformat
-" autocmd BufWritePre *.jsx Neoformat
-
-"Easycommenting "
-" autocmd FileType js,coffee,c,cpp,java,javascript let b:comment_leader = '// ' "
-" autocmd FileType vim,rc let b:comment_leader = '" ' "
-" autocmd FileType conf,fstab,ruby,python let b:comment_leader = '# ' "
-
 " Gundo
 if has('python3')
   let g:gundo_prefer_python3 = 1
@@ -57,12 +54,12 @@ endif
 let Tlist_Auto_Open=1
 let Tlist_Exit_OnlyWindow=1
 
-let g:ycm_rust_src_path = '/usr/local/rust/src'
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_add_preview_to_completeopt = 1
+" let g:ycm_rust_src_path = '/usr/local/rust/src'
+" let g:ycm_collect_identifiers_from_comments_and_strings = 1
+" let g:ycm_collect_identifiers_from_tags_files = 1
+" let g:ycm_seed_identifiers_with_syntax = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+" let g:ycm_add_preview_to_completeopt = 1
 
 let g:elm_setup_keybindings = 0
 
@@ -75,7 +72,7 @@ let g:indent_guides_color_change_percent = 3
 let g:indent_guides_enable_on_vim_startup = 1
 let g:jsx_ext_required = 0
 
-let g:flow#enable = 1
+" let g:flow#enable = 1
 
 let g:deoplete#enable_at_startup = 1
 
@@ -132,6 +129,7 @@ let g:deoplete#sources#ternjs#in_literal = 0
 let g:deoplete#sources#ternjs#filetypes = [
       \ 'jsx',
       \ 'javascript.jsx',
+      \ 'typescript',
       \ 'vue',
       \ '...'
       \ ]

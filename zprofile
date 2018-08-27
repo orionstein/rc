@@ -12,3 +12,4 @@ if [ -n "$SSH_TTY" -a -z "$STY" ]; then
 fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export HOST="0.0.0.0"

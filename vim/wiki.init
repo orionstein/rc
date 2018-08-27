@@ -1,0 +1,11 @@
+let g:vimwiki_list = [{'path':'~/wiki/wiki', 'path_html':'~/wiki/html'}]
+
+:nnoremap <Leader>d "=strftime("%a %d %b %Y")<CR>P
+:inoremap <Leader>d <C-R>=strftime("%a %d %b %Y")<CR>
+
+fu! SyncWiki()
+  execute '!aws' shellescape('s3') shellescape('sync') shellescape('/home/orion/wiki') shellescape('s3://s3planning')
+endf
+
+:command SW call SyncWiki()
+:nnoremap <Leader>w :call SyncWiki()<CR>

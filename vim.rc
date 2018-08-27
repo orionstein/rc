@@ -3,3 +3,4 @@ source $HOME/.rc/vim/general.init
 source $HOME/.rc/vim/plugins.init
 source $HOME/.rc/vim/keys.init
 source $HOME/.rc/vim/line.init
+source $HOME/.rc/vim/wiki.init
