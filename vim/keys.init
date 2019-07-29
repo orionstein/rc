@@ -1,9 +1,13 @@
 "Customization and plugin mapping "
 let mapleader=","
 
-"Ctrlp "
-noremap <Leader>b <ESC>:CtrlPBuffer<CR>
-noremap <Leader><SPACE> <ESC>:CtrlPMRUFiles<CR>
+let g:ranger_map_keys = 0
+
+noremap <c-p> <ESC>:FZF<CR>
+noremap <Leader><SPACE> <ESC>:FZFMru<CR>
+noremap <Leader>b <ESC>:<C-u>call Run_buffersearch()<CR>
+
+map - <ESC>:RangerCurrentFile<CR>
 
 nmap <BACKSPACE> <Plug>(easymotion-overwin-f)
 " nmap <Leader>f <Plug>(easymotion-prefix)

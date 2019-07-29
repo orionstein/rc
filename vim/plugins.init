@@ -1,41 +1,48 @@
-"Ctrlp "
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_use_caching = 0
-let g:ctrlp_custom_ignore = '\v[\/](_build|(\.(git|hg|svn)))$'
-let g:ctrlp_max_depth = 10
-let g:ctrlp_max_files = 0 "
-set wildignore+=*/tmp/*,*.o,*.so,*.swp,*.zip,*.jar,*.class,*.pdf,*.gif,*.png,*.jpg,*.o,*.hi "
-if executable("ag")
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
-        \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-        \ }
-endif
+
+let g:ranger_replace_netrw = 1 " open ranger when vim open a directory
+
+function Run_buffersearch()
+  call fzf#run({'source': map(range(1, bufnr('$')), 'bufname(v:val)'),
+            \ 'sink': 'e', 'down': '30%'})
+endfunction
+
+" command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>, '--color-path="0;33"',
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
+" command! -bang -nargs=* Ag call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 "Easymotion "
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let g:EasyMotion_smartcase = 1
 
+let g:ale_use_global_executables = 1
+let g:ale_typescript_tslint_use_global = 1
+let g:ale_typescript_tslint_executable = "tslint"
+
 let g:ale_linters = {
-\   'javascript': ['eslint', 'jshint'],
-\   'typescript': ['eslint', 'tslint', 'typecheck', 'tsserver'],
+\   'javascript': ['eslint'],
+\   'typescript': ['tslint', 'tsserver', 'eslint'],
 \}
 
 let g:ale_fixers = {
-\   'javascript': ['prettier', 'eslint'],
-\   'javascript.jsx': ['prettier', 'eslint'],
-\   'typescript': ['prettier', 'tslint', 'eslint'],
+\   'javascript': ['prettier'],
+\   'js': ['prettier'],
+\   'jsx': ['prettier'],
+\   'tsx': ['tslint', 'prettier'],
+\   'ts': ['tslint', 'prettier'],
+\   'javascript.jsx': ['prettier'],
+\   'typescript': ['tslint', 'prettier'],
 \}
 
-
 let g:airline#extensions#ale#enabled = 1
-" Write this in your vimrc file
+" " Write this in your vimrc file
 let g:ale_lint_on_text_changed = 'never'
-" You can disable this option too
-" if you don't want linters to run on opening a file
+" " You can disable this option too
+" " if you don't want linters to run on opening a file
 let g:ale_lint_on_enter = 0
 
 " vimux "
@@ -137,3 +144,17 @@ let g:deoplete#sources#ternjs#filetypes = [
 " Use tern_for_vim.
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
+
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
+augroup pencil
+  autocmd!
+  autocmd filetype markdown,mkd,wiki,text,txt call pencil#init()
+        \ | call lexical#init()
+        \ | call litecorrect#init()
+        \ | setl spell spl=en_us fdl=4 noru nonu nornu
+        \ | setl fdo+=search
+augroup END
+
+autocmd VimEnter * MBEOpen

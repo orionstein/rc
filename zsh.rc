@@ -187,26 +187,63 @@ function build_docker {
   sudo docker rmi ${PWD##*/}
 }
 
+function upgrade_eslint {
+  npm i -g eslint-plugin-react eslint-plugin-jsx-a11y eslint-plugin-babel eslint-plugin-mocha eslint-plugin-jest babel-eslint @rentpath/eslint-config-rentpath eslint-plugin-import
+}
+
+function upgrade_node_modules {
+  npm i -g npm;
+  npm i -g babel-cli commitizen create-react-app cz-lerna-changelog elm eslint esprint jq lerna neon neon-cli nexe node-gyp npm phantomjs-prebuilt pkg prettier serverless tern typescript webpack-stats-duplicates yarn tslint eslint-plugin-react eslint-plugin-jsx-a11y eslint-plugin-babel eslint-plugin-mocha eslint-plugin-jest babel-eslint @rentpath/eslint-config-rentpath eslint-plugin-import;
+}
+
+function upgrade_python {
+  pip install --user --upgrade pip;
+  pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install --user -U;
+}
+
+function upgrade_stuff {
+  sudo pacman -Syu --noconfirm;
+  rustup update;
+  upgrade_node_modules;
+  upgrade_oh_my_zsh;
+  upgrade_python;
+  yaourt -Syu --devel --aur --m-arg --skipchecksums --m-arg --skippgpcheck;
+}
+
 alias lsdf='get_diff_out;cat ;echo ;'
 alias rb='git svn rebase'
 alias sdf=git_diff
 alias up=run_docker
 alias build=build_docker
 alias vim='nvim'
+alias vimrc='nvim $HOME/.vimrc'
 alias wifi='sudo ip link set down wlp1s0; sudo ifconfig wlp1s0 down; sudo wifi-menu'
-alias cleandockerimages="docker images | grep none | awk '{print $3}' | xargs docker rmi -fv"
-alias cleandockercontainers="docker ps -a | grep 'Exit' | awk '{print $1}' | xargs docker rm -fv"
+alias cleandockerimages="docker images | grep none | awk '{print $3}' | xargs docker rmi -f"
+alias cleandockercontainers="docker ps -a | awk '{print $1}' | xargs docker rm -fv"
 alias cleandockercontainersall="docker rm -fv $(docker ps -a -q)"
 alias cleandockervolumes="docker volume ls -qf dangling=true | awk '{print $1}' | xargs docker volume rm"
 alias cleandocker="cleandockercontainers;cleandockerimages;cleandockervolumes"
 alias yu='sudo apt-get update && sudo apt-get upgrade'
 alias xp='echo "WM_CLASS(STRING) = \"NAME\", \"CLASS\"" && xprop | grep "WM_WINDOW_ROLE\|WM_CLASS"'
 alias todo="$HOME/software/todo.txt-cli/todo.sh"
+alias vpn="$HOME/.rentjsvpn"
 alias ack='ag'
+alias upgrade=upgrade_stuff
 alias glo='killall gnome-session'
+alias tn='tmux -2 new -s base'
+alias t='tmux -2 attach'
 alias jsonlint='python -mjson.tool'
 alias awsorion='export AWS_DEFAULT_PROFILE=orion'
 alias awssp='export AWS_DEFAULT_PROFILE=startingpoints'
+
+alias localenv="cp $HOME/envs/local-env $PWD/.envrc;direnv allow"
+alias testenv="cp $HOME/envs/test-env $PWD/.envrc;direnv allow"
+alias rpenv="cp $HOME/envs/rp-env $PWD/.envrc;direnv allow"
+
+alias killnodewatchers="ps ax | ag 'node.*watch' | awk -F ' ' '{print $1}' | xargs kill -9"
+alias runag="killnodewatchers;localenv;yarn run dev"
+alias runagprod="killnodewatchers;localenv;yarn run dev"
+alias testag="APPLICATIONS_AG_ASSET_PROTOCOL=https APPLICATIONS_AG_PROTOCOL=https yarn run test"
 
 if [ $IS_OSX ]; then
   alias ls='ls -G'
@@ -228,6 +265,14 @@ if [ -f "$HOME/.zsh.local" ]; then
   source $HOME/.zsh.local
 fi
 
+# Setting ag as the default source for fzf
+export FZF_DEFAULT_COMMAND='ag -g ""'
+# export FZF_DEFAULT_COMMAND='ag -l --path-to-ignore ~/.ignore --nocolor --hidden -g ""'
+# export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
@@ -243,3 +288,12 @@ export NVM_DIR="$HOME/.nvm"
 [[ -f /Users/ofree/.nvm/versions/node/v9.7.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/ofree/.nvm/versions/node/v9.7.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+eval "$(direnv hook zsh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /home/orion/.nvm/versions/node/v11.7.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /home/orion/.nvm/versions/node/v11.7.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh

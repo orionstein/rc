@@ -29,6 +29,7 @@ set -g prefix ^Q
 set -g prefix2 ^Q
 bind q send-prefix
 bind-key C-q last-window
+bind -n C-k clear-history
 
 # Alt jk for moving between tabs
 bind-key -n M-j next-window
