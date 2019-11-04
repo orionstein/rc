@@ -235,6 +235,7 @@ alias t='tmux -2 attach'
 alias jsonlint='python -mjson.tool'
 alias awsorion='export AWS_DEFAULT_PROFILE=orion'
 alias awssp='export AWS_DEFAULT_PROFILE=startingpoints'
+alias awskc='export AWS_DEFAULT_PROFILE=onion'
 
 alias localenv="cp $HOME/envs/local-env $PWD/.envrc;direnv allow"
 alias testenv="cp $HOME/envs/test-env $PWD/.envrc;direnv allow"
@@ -297,3 +298,7 @@ eval "$(direnv hook zsh)"
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [[ -f /home/orion/.nvm/versions/node/v11.7.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /home/orion/.nvm/versions/node/v11.7.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
+
+export PATH=$PATH:/home/orion/bin
+
+source '/home/orion/lib/azure-cli/az.completion'

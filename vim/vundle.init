@@ -38,7 +38,6 @@ Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
 Bundle 'codegram/vim-codereview'
 Plugin 'sjl/gundo.vim'
-Plugin 'tpope/vim-fugitive'
 Plugin 'gregsexton/gitv'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -57,6 +56,7 @@ Plugin 'reedes/vim-lexical' " Better spellcheck mappings
 Plugin 'reedes/vim-litecorrect' " Better autocorrections
 Plugin 'reedes/vim-textobj-sentence' " Treat sentences as text objects
 Plugin 'reedes/vim-wordy' " Weasel words and passive voice
+Plugin 'tpope/vim-fugitive'
 
 " Editing "
 Plugin 'tpope/vim-repeat'
@@ -65,7 +65,7 @@ Plugin 'myint/syntastic-extras'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'Shougo/deoplete.nvim'
-Plugin 'carlitux/deoplete-ternjs'
+" Plugin 'carlitux/deoplete-ternjs'
 
 " Tag Support "
 Plugin 'vim-scripts/taglist.vim'
@@ -91,6 +91,7 @@ Plugin 'elzr/vim-json'
 " Plugin 'sidorares/node-vim-debugger'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'rust-lang/rust.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'tomlion/vim-solidity'

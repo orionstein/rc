@@ -13,3 +13,7 @@ fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export HOST="0.0.0.0"
+
+export PATH=$PATH:/home/orion/bin
+
+source '/home/orion/lib/azure-cli/az.completion'
