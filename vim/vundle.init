@@ -19,6 +19,7 @@ Plugin 'pbogut/fzf-mru.vim'
 Plugin 'francoiscabrol/ranger.vim'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'fholgado/minibufexpl.vim'
+Plugin 'mileszs/ack.vim'
 
 " Color "
 Plugin 'godlygeek/csapprox'

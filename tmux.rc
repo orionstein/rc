@@ -88,10 +88,10 @@ bind p run "tmux set-buffer -- \"$(clip-paste)\"; tmux paste-buffer"
 bind C-v run "tmux set-buffer -- \"$(clip-paste -b)\"; tmux paste-buffer"
 
 # Vim copy mode
-set-window-option -g mode-keys vi
-bind-key -t vi-copy 'v' begin-selection
-bind-key -t vi-copy 'y' copy-selection
-bind -t vi-copy Escape cancel
+# set-window-option -g mode-keys vi
+# bind-key -t vi-copy 'v' begin-selection
+# bind-key -t vi-copy 'y' copy-selection
+# bind -t vi-copy Escape cancel
 
 # Saner split window shortcuts
 bind-key | split-window -h -c "#{pane_current_path}"
